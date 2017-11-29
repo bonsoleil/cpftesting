@@ -1,6 +1,6 @@
 <!DOCTYPE html> <!-- Tipo de documento -->
 <head> <!-- Inicio HEAD -->
-	<title> <!-- Cloud Profesor Testing</title> <!-- Titulo HEAD -->
+	<title> <!-- Test 1</title> <!-- Titulo HEAD -->
 </head> <!-- Fin HEAD -->
 
 <body> <!-- Inicio BODY -->
@@ -40,8 +40,8 @@
 	//Funcion RGB
 	function RGB(){
 		if(cpf){
-			if(lightdata < 200){ //Si el valor de "lightdata" es inferior a 200, ejecuta el programa
-				cpf.setChainableLed("0, 255, 0, 0;"); //  255, 0, 0 a RGB = Rojo
+			if(lightdata < 100){ //Si el valor de "lightdata" es inferior a 200, ejecuta el programa
+				cpf.setChainableLed("0, 255, 1, 0;"); //  255, 0, 0 a RGB = Rojo
 				cpf.request('["analogWrite", 3, 255]'); //  255 al pin 3
 
 			}

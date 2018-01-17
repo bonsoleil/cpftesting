@@ -18,8 +18,9 @@
 		if(cpf){
 			movSensor = cpf.get(“2”);
 			document.getElementById("mov_value").innerHTML = movSensor; }
-		setTimeout(main, 300);
+		setTimeout(main, 1000);
 	}
+	
 	function setup() {
 		if(cpf) {
 		cpf.setPinMode(‘[“resetPin”],["setPinMode", "digital", 2, "INPUT"]’) }

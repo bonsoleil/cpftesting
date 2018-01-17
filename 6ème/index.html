@@ -4,64 +4,35 @@
 	<title> Cloud </title>
 <center>
 	<h1>TEST 23</h1>
-	<h1>Light Sensor:</h1>
-	<span id="lightvalue">none</span>
+
 	<br>
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
-	<br>
-	<h1>Button</h1>
-	<span id="buttonValue">none</span>
+
 	
 </center>
 
 <script>
 	
-	var lightdata;
-	var tempdata;
-	var tempConverted;
-	var newTemp;
-	setup();// Analog
-	function loop() {
-		if(cpf){
-			lightdata = cpf.get("light sensor");
-			tempdata = cpf.get("temperature sensor");
-			newTemp = cpf.get("d6");
-			tempConverted = toCelsius(tempdata);
-			document.getElementById("tempvalue").innerHTML = tempConverted;
-			document.getElementById("lightvalue").innerHTML = lightdata;
-			document.getElementById("buttonValue").innerHTML = newTemp;
-			
-			
+var temp;
+var tempconverted;
+
+	
+	setup();
+	
+	function main(){
+		if (cpf);{
+		
+		temp = cpf.get("temperature sensor");
+		tempconverted = toCelsius(temp);
+		document.getElementById("tempvalue").innerHTML = tempconverted;
+	
+	
+	
 		}
-		setTimeout(loop, 0010);
+		setTimeout(main, 1000); 
 	}
 	
-	function RGB(){
-		if(cpf){
-			if(lightdata < 200){
-				cpf.setChainableLed("0, 255, 0, 0;");
-				cpf.request('["analogWrite", 3, 255]');
-				
-			else{
-				cpf.setChainableLed("0, 0, 0, 0;");
-				cpf.request('["analogWrite", 3, 0]');
-			}	
-		}
-	}
-	
-	function RGB2(){
-		if(cpf){
-			if(button == 1){
-				cpf.setChainableLed("0, 255, 0, 0;");
-			}
-			else{
-				cpf.setChainableLed("0, 0, 0, 0;");
-			}
-		}
-	}
-	
-	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
@@ -69,13 +40,29 @@
 		return temperature.toFixed(2);
 	}
 	
-	loop();
+	if (cpf){
 	
-	// cpf setup
-	function setup(){
-		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3,"PWM"], ["grove_newChainableLED", 7, 8, 1], ["setPinMode", "digital", 6, "INPUT"]'); 
+	if(tempcomverted > 22){                         
+		
+		cpf.recuest('["digitalWrite", 5, 200]');
+		
 	}
+	
+	if(tempcomverted > 24){
+	cpf.recuest('["digitalWrite", 5, 255]');
+	}
+	}
+	
+	main();
+	
+	setup(){
+	if cpf{
+		
+		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 5,"PWM"], ["grove_newChainableLED", 7, 8, 1]'); 
+
+	}	
+	}
+	
 	
 	</script>
 </body>

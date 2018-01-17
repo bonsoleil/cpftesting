@@ -9,18 +9,21 @@
 </center>
 <script>
 	var movSensor;
-	setup();
-	main();
+	
+	
 	function main() {
 		if(cpf){
 			movSensor = cpf.get(“2”);
 			document.getElementById("mov_value").innerHTML = movSensor; }
 		setTimeout(main, 300);
 	}
-function setup() {
+	function setup() {
 	if(cpf) {
 		cpf.setPinMode(‘[“resetPin”],["setPinMode", "digital", 2, "INPUT"]’) }
 }
+	
+	setup();
+	main();
 </script>
 </body>
 </html>

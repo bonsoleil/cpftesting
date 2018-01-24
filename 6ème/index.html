@@ -21,7 +21,7 @@ var tempconverted;
 	setup();
 	
 	function main(){
-		if (cpf);{
+		if (cpf){
 		
 		temp = cpf.get("temperature sensor");
 		tempconverted = toCelsius(temp);
@@ -42,13 +42,52 @@ var tempconverted;
 	
 	if (cpf){
 	
-	if(tempcomverted > 22){                         
+	if(tempcomverted == 22){                         
 		
 		cpf.recuest('["digitalWrite", 5, 200]');
 		
 	}
-	
-	if(tempcomverted > 24){
+		if(tempcomverted == 16){                         
+		
+		cpf.recuest('["digitalWrite", 5, 145]');
+		
+	}
+		if(tempcomverted == 15){                         
+		
+		cpf.recuest('["digitalWrite", 5, 125]');
+		
+	}
+		if(tempcomverted == 19){                         
+		
+		cpf.recuest('["digitalWrite", 5, 180]');
+		
+	}
+		if(tempcomverted == 17){                         
+		
+		cpf.recuest('["digitalWrite", 5, 175]');
+		
+	}
+		if(tempcomverted == 18){                         
+		
+		cpf.recuest('["digitalWrite", 5, 195]');
+		
+	}
+		if(tempcomverted == 21){                         
+		
+		cpf.recuest('["digitalWrite", 5, 190]');
+		
+	}
+		if(tempcomverted == 23){                         
+		
+		cpf.recuest('["digitalWrite", 5, 225]');
+		
+	}
+		if(tempcomverted == 20){                         
+		
+		cpf.recuest('["digitalWrite", 5, 180]');
+		
+	}
+	if(tempcomverted == 24){
 	cpf.recuest('["digitalWrite", 5, 255]');
 	}
 	}

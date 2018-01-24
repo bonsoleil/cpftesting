@@ -41,13 +41,9 @@
 	function alarm(){
 		if(cpf){
 			if(flamedata == 0 && button == 1){
-				cpf.request(=["tone_play", 3, 329, 1000])
-				cpf.request(=["tone_play", 3, 293, 500])
-				cpf.request(=["tone_play", 3, 261, 500])
+				cpf.request(=["tone_play", 3, 329, 1000], ["tone_play", 3, 293, 500], ["tone_play", 3, 261, 500]);
 		}
 	}
-	
-
 	
 	// Temperature
 	function toCelsius(value) {
@@ -62,7 +58,7 @@
 	// cpf setup
 	function setup(){
 		if(cpf)
-		cpf.setPinMode(‘[“resetPin”],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3, "TONE"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"]’) 
+		cpf.setPinMode(‘[“resetPin”],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3, "TONE"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"]’); 
 	}
 
 	

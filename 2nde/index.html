@@ -1,9 +1,9 @@
 </head>
 
 <body>
-	<title> Cloud </title>
+	<title> Cloud Profesor </title>
 <center>
-	<h1>TEST 23</h1>
+	<h1>Amarillo</h1>
 	<h1>Flame Sensor:</h1>
 	<span id="flamevalue">none</span>
 	<br>
@@ -38,23 +38,16 @@
 		setTimeout(loop, 0010);
 	}
 	
-	function RGB(){
+	function alarm(){
 		if(cpf){
-			if(flamedata == 0){
+			if(flamedata == 0 && button == 1){
 				cpf.request(=["tone_play", 3, 329, 1000])
 				cpf.request(=["tone_play", 3, 293, 500])
 				cpf.request(=["tone_play", 3, 261, 500])
 		}
 	}
 	
-	function RGB2(){
-		if(cpf){
-			if(button == 1){
-				cpf.request(=["tone_play", 3, 329, 1000])
-				cpf.request(=["tone_play", 3, 293, 500])
-				cpf.request(=["tone_play", 3, 261, 500])		
-		}
-	}
+
 	
 	// Temperature
 	function toCelsius(value) {

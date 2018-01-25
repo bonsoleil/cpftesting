@@ -3,7 +3,7 @@
 <body>
 	<title> Cloud Profesor </title>
 <center>
-	<h1>Amarillo</h1>
+	<h1>Ama 1</h1>
 	<h1>Flame Sensor:</h1>
 	<span id="flamevalue">none</span>
 	<br>
@@ -22,7 +22,7 @@
 	var tempdata;
 	var tempConverted;
 	var newTemp;
-	setup();// Analog
+	
 	function loop() {
 		if(cpf){
 			flamedata = cpf.get("d5");
@@ -35,12 +35,12 @@
 			
 			
 		}
-		setTimeout(loop, 0010);
+		setTimeout(loop, 1000);
 	}
 	
 	function alarm(){
 		if(cpf){
-			if(flamedata == 0 && button == 1){
+			if(flamedata == 0 || button == 1){
 				cpf.request(=["tone_play", 3, 329, 1000], ["tone_play", 3, 293, 500], ["tone_play", 3, 261, 500]);
 		}
 	}
@@ -53,6 +53,7 @@
 		return temperature.toFixed(2);
 	}
 	
+	setup();
 	loop();
 	
 	// cpf setup
@@ -60,7 +61,6 @@
 		if(cpf)
 		cpf.setPinMode(‘[“resetPin”],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3, "TONE"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"]’); 
 	}
-
 	
 	</script>
 </body>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 12</h1>
+	<h1> Test 13</h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -42,15 +42,19 @@
 			document.getElementById("button").innerHTML = button;
 			document.getElementById("temperature").innerHTML = tempConverted;
 			document.getElementById("flame").innerHTML = flame;
-			if(button == 1 || flame == 0){
-				cpf.request('["tone_play", 8, 261, 100]');
-			}
+			alarm();
 		}
 		setTimeout(main, 1000);
 	}
 	
 	main();
-	
+	function alarm(){
+		if(cpf){
+			if(button == 1 || flame == 0){
+				cpf.request('["tone_play", 8, 261, 100], ["tone_play", 8, 293, 100], ["tone_play", 8, 329, 100], ["tone_play", 8, 349, 100], ["tone_play", 8, 392, 100], ["tone_play", 8, 440, 100], ["tone_play", 8, 493, 100], ["tone_play", 8, 523, 100]');
+			}
+		}
+	}
 	function setup(){
 		if(cpf){
 			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 2, "INPUT"], ["setPinMode", "digital", 6, "INPUT"], ["setPinMode", "digital", 5, "TONE"]');

@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 8</h1>
+	<h1> Test 9</h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -49,17 +49,11 @@
 	
 	main();
 	
-	function alarm(){
-		if(cpf){
-			if(flame == 0 || button == 1){
-				cpf.request('["tone_play", 8, 261, 100]');
-			}
-		}
-	}
+	
 	
 	function setup(){
 		if(cpf){
-			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 2, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]. ["setPinMode", "digital", 8, "TONE"]');
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 2, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]');
 		}
 	}
 </script>

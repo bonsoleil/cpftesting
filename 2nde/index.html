@@ -1,54 +1,27 @@
-</head>
-
-<body>
-	<title> Cloud Profesor </title>
-<center>
-	<h1>Ama 6</h1>
-	<h1>Flame Sensor:</h1>
-	<span id="flamevalue">none</span>
-	<br>
-	<h1>Temperature Sensor</h1>
-	<span id="tempvalue">none</span>
-	<br>
-	<h1>Button</h1>
-	<span id="buttonValue">none</span>
+<!DOCTYPE html>
+<head>
 	
+	<title> CPF Bon Soleil </title>
+	
+</head>
+<body>
+<center>
+	<h1>Temperature:</h1>
+	<span id=temperature> none </span>
+	
+	<h1> Flame </h1>
+	<span id=flame> none </span>
+	
+	<h1> Button </h1>
+	<span id=button> none </span>
 </center>
-
 <script>
 	
-	var flamedata;
-	var button; 
-	var tempdata;
+	var temp;
 	var tempConverted;
-	var newTemp;
+	var button;
+	var flame;
 	
-	setup();
-	loop();
-	
-	function loop() {
-		if(cpf){
-			flamedata = cpf.get("d5");
-			tempdata = cpf.get("temperature sensor");
-			button = cpf.get("d4");
-			tempConverted = toCelsius(tempdata);
-			document.getElementById("tempvalue").innerHTML = tempConverted;
-			document.getElementById("flamevalue").innerHTML = flamedata;
-			document.getElementById("buttonValue").innerHTML = button;
-			alarm();
-		}
-		setTimeout(loop, 1000);
-	}
-	
-	function alarm(){
-		if(cpf){
-			if(flamedata == 0 || button == 1){
-				cpf.request(["tone_play", 3, 329, 1000], ["tone_play", 3, 293, 500], ["tone_play", 3, 261, 500]);
-			}
-		}
-	}
-	
-	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
@@ -56,13 +29,26 @@
 		return temperature.toFixed(2);
 	}
 	
-	// cpf setup
-	function setup(){
+	function main() {
 		if(cpf){
-		 cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"], ["setPinMode", "digital", 3, "TONE"]'); 
+			button = cpf.get("d4");
+			flame = cpf.get("d5");
+			temp = cpf.get("a0");
+			tempConverted = toCelsius(temp);
+			document.getElementById("temperature").innerHTML = tempConverted;
+			document.getElementById("flame").innerHTML = flame;
+			document.getElementById("button").innerHTML = button;
 		}
+		setTimeout(main, 1000);
 	}
 	
-	</script>
+	main();
+	
+	function setup(){
+		if(cpf){
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"], ["setPinMode", "digital", 3, "TONE"]');
+		}
+	}
+</script>
 </body>
 </html>

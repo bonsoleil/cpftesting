@@ -3,7 +3,7 @@
 <body>
 	<title> Cloud Profesor </title>
 <center>
-	<h1>Ama 2</h1>
+	<h1>Ama 3</h1>
 	<h1>Flame Sensor:</h1>
 	<span id="flamevalue">none</span>
 	<br>
@@ -53,14 +53,15 @@
 		return temperature.toFixed(2);
 	}
 	
-	setup();
-	loop();
-	
 	// cpf setup
 	function setup(){
-		if(cpf)
-		cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3, "TONE"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"]'); 
+		if(cpf){
+		 cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"], ["setPinMode", "digital", 3, "TONE"]'); 
+		}
 	}
+	
+	setup();
+	loop();
 	
 	</script>
 </body>

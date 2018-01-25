@@ -19,8 +19,8 @@
 	
 	var temp;
 	var tempConverted;
-	var button;
-	var flame;
+	
+	setup();
 	
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
@@ -33,11 +33,9 @@
 		if(cpf){
 			button = cpf.get("d4");
 			flame = cpf.get("d5");
-			temp = cpf.get("a0");
+			temp = cpf.get("temperature sensor");
 			tempConverted = toCelsius(temp);
 			document.getElementById("temperature").innerHTML = tempConverted;
-			document.getElementById("flame").innerHTML = flame;
-			document.getElementById("button").innerHTML = button;
 		}
 		setTimeout(main, 1000);
 	}
@@ -46,7 +44,7 @@
 	
 	function setup(){
 		if(cpf){
-			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "INPUT"], ["setPinMode", "digital", 3, "TONE"]');
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"]');
 		}
 	}
 </script>

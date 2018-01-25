@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 6</h1>
+	<h1> Test 7</h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -42,7 +42,6 @@
 			document.getElementById("button").innerHTML = button;
 			document.getElementById("temperature").innerHTML = tempConverted;
 			document.getElementById("flame").innerHTML = flame;
-			alarm();
 		}
 		setTimeout(main, 1000);
 	}
@@ -50,9 +49,7 @@
 	main();
 	
 	function alarm(){
-		if(flame == 0 || button == 1){
 		cpf.request('["tone_play", 8, 261, 100], ["tone_play", 8, 293, 100], ["tone_play", 8, 329, 100], ["tone_play", 8, 349, 100], ["tone_play", 8, 392, 100], ["tone_play", 8, 440, 100], ["tone_play", 8, 493, 100], ["tone_play", 8, 523, 100]');
-		}
 	}
 	
 	function setup(){

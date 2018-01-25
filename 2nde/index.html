@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 1</h1>
+	<h1> Test </h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -43,7 +43,7 @@
 			document.getElementById("temperature").innerHTML = tempConverted;
 			document.getElementById("flame").innerHTML = flame;
 			if(button == 1 || flame == 0){
-				cpf.request('["tone_play", 8, 261, 100], ["tone_play", 8, 293, 100]');
+				cpf.request('["tone_play", 8, 261, 100]');
 			}
 		}
 		

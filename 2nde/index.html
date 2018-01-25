@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 1 </h1>
+	<h1> Test 2 </h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -33,8 +33,6 @@
 	
 	function main() {
 		if(cpf){
-			button = cpf.get("d4");
-			flame = cpf.get("d5");
 			temp = cpf.get("temperature sensor");
 			tempConverted = toCelsius(temp);
 			document.getElementById("temperature").innerHTML = tempConverted;
@@ -46,7 +44,7 @@
 	
 	function setup(){
 		if(cpf){
-			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"]');
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"]');
 		}
 	}
 </script>

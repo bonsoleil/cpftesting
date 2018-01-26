@@ -16,10 +16,9 @@
 	var movSensor;
 	
 	function main() {
-		if(cpf){
 			movSensor = cpf.get("d2");
-			document.getElementById("mov_value").innerHTML = movSensor; }
-		setTimeout(main, 1000);
+			document.getElementById("mov_value").innerHTML = movSensor;
+			setTimeout(main, 10);
 	}
 	
 	function setup() {

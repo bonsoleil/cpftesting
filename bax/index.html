@@ -16,8 +16,11 @@
 	var movSensor;
 	
 	function main() {
+		if(cpf){
 			movSensor = cpf.get("d6");
 			document.getElementById("mov_value").innerHTML = movSensor;
+		}
+		setTimeout(main, 500);
 	}
 	
 	function setup() {
@@ -26,7 +29,7 @@
 	
 	setup();
 	main();
-	setTimeout(main, 500);
+	
 
 </script>
 </body>

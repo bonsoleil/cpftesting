@@ -1,0 +1,68 @@
+<!DOCTYPE html
+
+<head>
+	<title>LIGHT SENSOR</title>
+</head>
+
+<body>
+<center>
+	<h1>TEST 13</h1>
+	<br>
+	<h1>Temperature Sensor</h1>
+	<span id="tempvalue">none</span>
+</center>
+
+<script>
+	
+	
+	var tempdata;
+	var tempConverted;
+	setup();
+	
+	// Analog
+	function loop() {
+		if(cpf)
+
+			tempdata = cpf.get("temperature sensor");
+			tempConverted = toCelsius(tempdata);
+			document.getElementById("tempvalue").innerHTML = tempConverted;
+			document.getElementById("lightvalue").innerHTML = lightdata;
+			RGB();
+			
+		}
+		setTimeout(loop, 1000);
+	}
+	
+	function RGB(){
+		if(cpf){
+			if(lightdata < 200){
+				cpf.setChainableLed("0, 255, 0, 0;");
+				cpf.request('["analogWrite", 3, 255]');
+
+			}
+			else{
+				cpf.setChainableLed("0, 0, 0, 0;");
+				cpf.request('["analogWrite", 3, 0]');
+			}	
+		}
+	}
+	
+	// Temperature
+	function toCelsius(value) {
+		var resistance = parseFloat((1023-value) * 10000 / value);
+		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
+		
+		return temperature.toFixed(2);
+	}
+	
+	loop();
+	
+	// cpf setup
+	function setup(){
+		if(cpf)
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3,"PWM"], ["grove_newChainableLED", 7, 8, 1]'); 
+	}
+	
+</script>
+</body>
+</html>

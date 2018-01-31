@@ -11,7 +11,7 @@
 	<span id="tempvalue">none</span>
 	<br>
 	<h1>Button</h1>
-	<span id="buttonValue">none</span>
+	<span id="watervalue">none</span>
 	
 </center>
 
@@ -20,7 +20,7 @@
 	var lightdata;
 	var tempdata;
 	var tempConverted;
-	var newTemp;
+	var waterdata;
 	setup();// Analog
 	function loop() {
 		if(cpf){
@@ -30,7 +30,7 @@
 			tempConverted = toCelsius(tempdata);
 			document.getElementById("tempvalue").innerHTML = tempConverted;
 			document.getElementById("lightvalue").innerHTML = lightdata;
-			document.getElementById("buttonValue").innerHTML = newTemp;
+			document.getElementById("watervalue").innerHTML = waterdata;
 			
 			
 		}
@@ -52,7 +52,7 @@
 	
 	function RGB2(){
 		if(cpf){
-			if(button == 1){
+			if(water == 1){
 				cpf.setChainableLed("0, 255, 0, 0;");
 			}
 			else{

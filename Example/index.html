@@ -12,14 +12,33 @@
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
 </center> <!-- Fin center -->
-
+	
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+	
 <script> 
+	
+	//Firebase
+	src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"
+	
+	  // Initialize Firebase
+	  // TODO: Replace with your project's customized code snippet
+	  var config = {
+	    apiKey: "AIzaSyChVwn9_lqApXiIDMlpxE2Rxs7ENecgxqg",
+	    authDomain: "cpftesting-b8e0f.firebaseapp.com",
+	    databaseURL: "https://cpftesting-b8e0f.firebaseio.com",
+	    storageBucket: "cloudprofesor1.appspot.com",
+	  };
+	  firebase.initializeApp(config);
 	
 	//Variables
 	var lightdata;
 	var tempdata;
 	var tempConverted;
-
+	var database = firebase.database();
+	
 	//Ejectuar function setup
 	setup();
 	
@@ -32,9 +51,17 @@
 			document.getElementById("tempvalue").innerHTML = tempConverted; // envia valor de "tempConverted" a "tempvalue" en el span del HTML
 			document.getElementById("lightvalue").innerHTML = lightdata; //envia valor de "lightdata" a "lightvalue" en el span del HTML
 			RGB();	//Ejecuta funcion RGB
+			sendData();
 			
 		}
 		setTimeout(main, 1000); // Ejecuta una funcion despues del timepo introducido en el primer parametro
+	}
+	
+	function sendData(){
+		firebase.database().set({
+			light : lightdata,
+			temperature : tempConverted
+		});
 	}
 	
 	//Funcion RGB

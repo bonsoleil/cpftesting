@@ -4,8 +4,6 @@
 	<title> Cloud </title>
 <center>
 	<h1>TEST 23</h1>
-	<h1>Light Sensor:</h1>
-	<span id="lightvalue">none</span>
 	<br>
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
@@ -17,40 +15,25 @@
 
 <script>
 	
-	var lightdata;
 	var tempdata;
 	var tempConverted;
 	var waterdata;
-	setup();// Analog
+	
+	setup();
+	
 	function loop() {
 		if(cpf){
-			lightdata = cpf.get("light sensor");
 			tempdata = cpf.get("temperature sensor");
-			newTemp = cpf.get("d6");
 			tempConverted = toCelsius(tempdata);
+			waterdata = cpf.get("d6");
 			document.getElementById("tempvalue").innerHTML = tempConverted;
-			document.getElementById("lightvalue").innerHTML = lightdata;
 			document.getElementById("watervalue").innerHTML = waterdata;
-			
 			
 		}
 		setTimeout(loop, 0010);
 	}
 	
-	function RGB(){
-		if(cpf){
-			if(lightdata < 200){
-				cpf.setChainableLed("0, 255, 0, 0;");
-				cpf.request('["analogWrite", 3, 255]');
-				
-			else{
-				cpf.setChainableLed("0, 0, 0, 0;");
-				cpf.request('["analogWrite", 3, 0]');
-			}	
-		}
-	}
-	
-	function RGB2(){
+	function waterFound(){
 		if(cpf){
 			if(water == 1){
 				cpf.setChainableLed("0, 255, 0, 0;");

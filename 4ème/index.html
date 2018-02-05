@@ -3,7 +3,7 @@
 <body>
 	<title> Cloud </title>
 <center>
-	<h1>TEST 23</h1>
+	<h1>TEST 24</h1>
 	<br>
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
@@ -14,10 +14,23 @@
 </center>
 
 <script>
+	//Api
+	src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"
+	
+	  // Initialize Firebase
+	  // TODO: Replace with your project's customized code snippet
+	  var config = {
+	    apiKey: "AIzaSyChVwn9_lqApXiIDMlpxE2Rxs7ENecgxqg",
+	    authDomain: "cpftesting-b8e0f.firebaseapp.com",
+	    databaseURL: "https://cpftesting-b8e0f.firebaseio.com",
+	    storageBucket: "cloudprofesor1.appspot.com",
+	  };
+	  firebase.initializeApp(config);
 	
 	var tempdata;
 	var tempConverted;
 	var waterdata;
+	var database = firebase.database();
 	
 	setup();
 	
@@ -28,7 +41,7 @@
 			waterdata = cpf.get("d6");
 			document.getElementById("tempvalue").innerHTML = tempConverted;
 			document.getElementById("watervalue").innerHTML = waterdata;
-			
+			sendData(tempConverted);
 		}
 		setTimeout(loop, 0010);
 	}
@@ -43,6 +56,13 @@
 			}
 		}
 	}
+	
+	function sendData(tempConverted){
+		firebase.database().set({  
+			temperature : tempConverted
+		});
+	}
+	
 	
 	// Temperature
 	function toCelsius(value) {

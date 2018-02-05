@@ -1,0 +1,105 @@
+<!DOCTYPE html> <!-- Tipo de documento -->
+<head> <!-- Inicio HEAD -->
+	<title> 
+</head> <!-- Fin HEAD -->
+
+<body> <!-- Inicio BODY -->
+<center> <!-- CENTER: Centra los elementos -->
+	<h1>TEST 1</h1>	<!-- H1: heading tipo 1, texto -->
+	<h1>Light Sensor:</h1> 
+	<span id="lightvalue">none</span> <!-- Span: permite juntar texto/documento -->
+	<br>	<!-- Break: salto de linea -->
+	<h1>Temperature Sensor</h1>
+	<span id="tempvalue">none</span>
+	<br>
+	<span id="tempState">none</span>
+</center> <!-- Fin center -->
+
+<!-- Firebase API -->
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+	
+<script> 
+	
+	//Firebase
+	src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"
+	
+	  // Initialize Firebase
+	  // TODO: Replace with your project's customized code snippet
+	  var config = {
+	    apiKey: "AIzaSyChVwn9_lqApXiIDMlpxE2Rxs7ENecgxqg",
+	    authDomain: "cpftesting-b8e0f.firebaseapp.com",
+	    databaseURL: "https://cpftesting-b8e0f.firebaseio.com",
+	    storageBucket: "cloudprofesor1.appspot.com",
+	  };
+	  firebase.initializeApp(config);
+	
+	//Variables
+	var lightdata;
+	var tempdata;
+	var tempConverted;
+	var database = firebase.database();
+	
+	//Ejectuar function setup
+	setup();
+	
+	// Funcion main
+	function main() {
+		if(cpf){ // cpf para usar cloud profesor
+			lightdata = cpf.get("light sensor"); // variable "lightdata" toma valor dado por "light sensor"
+			tempdata = cpf.get("temperature sensor"); // variable "tempdata" toma valor dado por "temperature sensor"
+			tempConverted = toCelsius(tempdata);	// variable "tempConverted" toma valor "return" de la funcion "toCelsius" con parametro "tempdata"
+			document.getElementById("tempvalue").innerHTML = tempConverted; // envia valor de "tempConverted" a "tempvalue" en el span del HTML
+			document.getElementById("lightvalue").innerHTML = lightdata; //envia valor de "lightdata" a "lightvalue" en el span del HTML
+			RGB();	//Ejecuta funcion RGB
+			sendData(lightdata, tempConverted);
+		}
+		setTimeout(main, 1000); // Ejecuta una funcion despues del timepo introducido en el primer parametro
+	}
+	
+	//Enviar data a baseDatos
+	function sendData(lightdata, tempConverted){
+		firebase.database().set({ 
+			light : lightdata, 
+			temperature : tempConverted
+		});
+	}
+	
+
+	//Funcion RGB
+	/*function RGB(){
+		if(cpf){
+			if(lightdata < 100){ //Si el valor de "lightdata" es inferior a 200, ejecuta el programa
+				cpf.setChainableLed("0, 255, 1, 0;"); //  255, 0, 0 a RGB = Rojo
+				cpf.request('["analogWrite", 3, 255]'); //  255 al pin 3
+			}
+			else{
+				cpf.setChainableLed("0, 0, 0, 0;"); // 0,0,0 a RGB 
+				cpf.request('["analogWrite", 3, 0]'); // 0 al pin 3
+			}	
+		}
+	}
+	*/
+
+	// Funcion Celsius → Tranforma el parametro dado
+	function toCelsius(value) {
+		var resistance = parseFloat((1023-value) * 10000 / value);
+		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
+		
+		return temperature.toFixed(2);
+	}
+	
+	//Ejecuta la funcion main
+	main();
+	
+	// Funcion setup: fija los pins segun: analog/digital ; input/output
+	function setup(){
+		if(cpf)
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3,"PWM"], ["grove_newChainableLED", 7, 8, 1]'); 
+	}
+	
+</script>
+</body>
+</html>

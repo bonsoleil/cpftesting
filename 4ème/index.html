@@ -3,7 +3,7 @@
 <body>
 	<title> Cloud </title>
 <center>
-	<h1>TEST 24</h1>
+	<h1>TEST 25</h1>
 	<br>
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
@@ -14,55 +14,19 @@
 </center>
 
 <script>
-	//Api
-	src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"
-	
-	  // Initialize Firebase
-	  // TODO: Replace with your project's customized code snippet
-	  var config = {
-	    apiKey: "AIzaSyChVwn9_lqApXiIDMlpxE2Rxs7ENecgxqg",
-	    authDomain: "cpftesting-b8e0f.firebaseapp.com",
-	    databaseURL: "https://cpftesting-b8e0f.firebaseio.com",
-	    storageBucket: "cloudprofesor1.appspot.com",
-	  };
-	  firebase.initializeApp(config);
 	
 	var tempdata;
 	var tempConverted;
 	var waterdata;
-	var database = firebase.database();
-	
-	setup();
 	
 	function loop() {
 		if(cpf){
 			tempdata = cpf.get("temperature sensor");
 			tempConverted = toCelsius(tempdata);
-			waterdata = cpf.get("d6");
 			document.getElementById("tempvalue").innerHTML = tempConverted;
-			document.getElementById("watervalue").innerHTML = waterdata;
-			sendData(tempConverted);
 		}
-		setTimeout(loop, 0010);
+		setTimeout(loop, 1000);
 	}
-	
-	function waterFound(){
-		if(cpf){
-			if(water == 1){
-				cpf.setChainableLed("0, 255, 0, 0;");
-			}
-			else{
-				cpf.setChainableLed("0, 0, 0, 0;");
-			}
-		}
-	}
-	
-	function sendData(tempConverted){
-		firebase.database().set({  
-			temperature : tempConverted
-		});
-	}
-	
 	
 	// Temperature
 	function toCelsius(value) {
@@ -72,12 +36,13 @@
 		return temperature.toFixed(2);
 	}
 	
+	setup();
 	loop();
 	
 	// cpf setup
 	function setup(){
 		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 3,"PWM"], ["grove_newChainableLED", 7, 8, 1], ["setPinMode", "digital", 6, "INPUT"]'); 
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"]'); 
 	}
 	
 	</script>

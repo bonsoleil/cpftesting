@@ -19,12 +19,15 @@
 		if(cpf){
 			movSensor = cpf.get("d6");
 			document.getElementById("mov_value").innerHTML = movSensor;
+			cpf.request('["grove_setColorRGB", 0, 255, 255, 255],["grove_setColorRGB", 1, 255, 255, 255],["grove_setColorRGB", 2, 255, 255, 255]');
+			
 		}
 		setTimeout(main, 1000);
 	}
 	
 	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 6,"INPUT"]');
+		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 6,"INPUT"], ["grove_newChainableLED", 5, 8, 3]');
+		
 	}
 	
 	setup();

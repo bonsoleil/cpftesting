@@ -1,9 +1,8 @@
-</head>
-
+<head>
 <body>
 	<title> Cloud </title>
 <center>
-	<h1>TEST 25</h1>
+	<h1>TEST 1</h1>
 	<br>
 	<h1>Temperature Sensor</h1>
 	<span id="tempvalue">none</span>
@@ -19,11 +18,13 @@
 	var tempConverted;
 	var waterdata;
 	
-	function loop() {
+	function main() {
 		if(cpf){
 			tempdata = cpf.get("temperature sensor");
+			waterdata = cpf.get("d6");
 			tempConverted = toCelsius(tempdata);
 			document.getElementById("tempvalue").innerHTML = tempConverted;
+			document.getElementById("watervalue").innerHTML = waterdata;
 		}
 		setTimeout(loop, 1000);
 	}
@@ -36,13 +37,14 @@
 		return temperature.toFixed(2);
 	}
 	
+
 	setup();
 	loop();
 	
 	// cpf setup
 	function setup(){
 		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"]'); 
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]'); 
 	}
 	
 	</script>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-	<h1> Test 3 </h1>
+	<h1> Test 4 </h1>
 	<br>
 	<h1>Temperature</h1>
 	<span id=temperature> none </span>
@@ -44,6 +44,7 @@
 			if(button == 1 || flame == 0){
 				cpf.request('["tone_play", 8, 261, 100]');
 			}
+		}
 		setTimeout(main, 1000);
 	}
 	
@@ -54,6 +55,7 @@
 			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 1, "INPUT"], ["setPinMode", "digital", 2, "INPUT"], ["setPinMode", "digital", 6, "INPUT"], ["setPinMode", "digital", 5, "TONE"]');
 		}
 	}
+		
 </script>
 </body>
 </html>

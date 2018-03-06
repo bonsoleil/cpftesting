@@ -17,12 +17,12 @@
 	
 	function main() {
 		if(cpf){
-			movSensor = cpf.get("d4");
+			movSensor = cpf.get("d8");
 			document.getElementById("mov_value").innerHTML = movSensor; }
 		setTimeout(main, 100); }
 	
 	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 4,"INPUT"]');}
+		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 8,"INPUT"]');}
 	
 	setup();
 	main();

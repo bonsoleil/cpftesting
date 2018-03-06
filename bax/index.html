@@ -18,15 +18,11 @@
 	function main() {
 		if(cpf){
 			movSensor = cpf.get("d6");
-			document.getElementById("mov_value").innerHTML = movSensor;
-		}
-		setTimeout(main, 100);
-	}
+			document.getElementById("mov_value").innerHTML = movSensor; }
+		setTimeout(main, 100); }
 	
 	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 6,"INPUT"]');
-		
-	}
+		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 6,"INPUT"]');}
 	
 	setup();
 	main();

@@ -7,22 +7,22 @@
 <body>
 	
 <center>
-	<h1> Movement detected: v2 </h1>
-	<span id=mov_value> none </span>
+	<h1>Light value: </h1>
+	<span id=lvalue> none </span>
 </center>
 	
 <script>
 	
-	var movSensor;
+	var lightdata;
 	
 	function main() {
 		if(cpf){
-			movSensor = cpf.get("d8");
-			document.getElementById("mov_value").innerHTML = movSensor; }
+			lightdata = cpf.get("a1");
+			document.getElementById("lvalue").innerHTML = lightdata; }
 		setTimeout(main, 100); }
 	
 	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "digital", 8,"INPUT"]');}
+		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 1, "INPUT"]');}
 	
 	setup();
 	main();

@@ -17,18 +17,13 @@
 var temp;
 var tempconverted;
 
-	
 	setup();
 	
 	function main(){
 		if (cpf){
-		
-		temp = cpf.get("temperature sensor");
-		tempconverted = toCelsius(temp);
-		document.getElementById("tempvalue").innerHTML = tempconverted;
-	
-	
-	
+			temp = cpf.get("temperature sensor");
+			tempconverted = toCelsius(temp);
+			document.getElementById("tempvalue").innerHTML = tempconverted;
 		}
 		setTimeout(main, 1000); 
 	}
@@ -40,8 +35,7 @@ var tempconverted;
 		return temperature.toFixed(2);
 	}
 	
-	if (cpf){
-	
+	//Cambiar por un switch
 	if(tempcomverted == 22){                         
 		
 		cpf.recuest('["digitalWrite", 5, 200]');
@@ -87,6 +81,7 @@ var tempconverted;
 		cpf.recuest('["digitalWrite", 5, 180]');
 		
 	}
+	
 	if(tempcomverted == 24){
 	cpf.recuest('["digitalWrite", 5, 255]');
 	}

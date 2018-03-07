@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 
 <head>
-<title> Temperature Value </title>
+<title> Outside conditions </title>
 </head>
 
 <body>
 	
 <center>
-	<h1>Temperature Value: </h1>
-	<span id=tempvalue> none </span>
+	<br>
+	<h1>Temperature (ºC): </h1>
+	<span id=tempdata> none </span>
+	<br>
+	<br>
+	<h1>Light value: </h1>
+	<span id=lightdata> none </span>
 </center>
 	
 <script>
 	
-	var tempdata;
+	var tempvalue;
+	var lightvalue;
 	
 	function main() {
 		if(cpf){
-			tempdata= cpf.get("a2");
-			celsius= toCelsius(tempdata);
-			document.getElementById("tempvalue").innerHTML = celsius; 
+			tempvalue= cpf.get("a0");
+			celsius= toCelsius(tempvalue);
+			lightvalue= cpf.get("a3");
+			document.getElementById("tempdata").innerHTML = celsius;
+			document.getElementById("lightdata").innerHTML = lightvalue;
 		}
 		setTimeout(main, 1000); 
-	}
-	
-	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 2, "INPUT"]');
 	}
 	
 	function toCelsius(value) {
@@ -33,6 +37,10 @@
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
 		
 		return temperature.toFixed(2);
+	}
+	
+		function setup() {
+		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "analog", 3, "INPUT"]');
 	}
 
 	

@@ -18,11 +18,14 @@
 	function main() {
 		if(cpf){
 			tempdata= cpf.get("a2");
-			document.getElementById("tempvalue").innerHTML = tempdata; }
-		setTimeout(main, 100); }
+			document.getElementById("tempvalue").innerHTML = tempdata; 
+		}
+		setTimeout(main, 1000); 
+	}
 	
 	function setup() {
-		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 2, "INPUT"]');}
+		cpf.setPinMode('["resetPin"],["setPinMode", "analog", 2, "INPUT"]');
+	}
 	
 	setup();
 	main();

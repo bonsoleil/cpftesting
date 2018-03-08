@@ -40,7 +40,7 @@
 				cpf.request('["grove_setColorRGB", 0, 255, 0, 0]')
 				document.getElementById("movDetected").style.opacity = "1";
 			} else{
-				cpf.request('["grove_setColorRGB", 0, 0, 0, 0]')
+				cpf.request('["digitalWrite", 3, 0]')
 				document.getElementById("movDetected").style.opacity = "0";
 			}
 		}

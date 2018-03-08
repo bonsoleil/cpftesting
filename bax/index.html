@@ -37,10 +37,10 @@
 			document.getElementById("tempdata").innerHTML = celsius;
 			document.getElementById("lightdata").innerHTML = lightvalue;
 			if(motionsensor == 1) {
-				cpf.request('["grove_setColorRGB", 0, 255, 0, 0]')
+				cpf.request('["grove_setColorRGB", 0, 255, 0, 0]');
 				document.getElementById("movDetected").style.opacity = "1";
 			} else{
-				cpf.request('["digitalWrite", 3, 0]')
+				cpf.request('["grove_setColorRGB", 0, 0, 0, 0]');
 				document.getElementById("movDetected").style.opacity = "0";
 			}
 		}

@@ -29,7 +29,6 @@
 	var motionsensor = 0;
 	
 	function main() {
-		if(cpf){
 			tempvalue= cpf.get("a0");
 			celsius= toCelsius(tempvalue);
 			lightvalue= cpf.get("a3");
@@ -43,7 +42,6 @@
 				cpf.set("rgb led", 0, 0, 0);
 				document.getElementById("movDetected").style.opacity = "0";
 			}
-		}
 		setTimeout(main, 1000); 
 	}
 	

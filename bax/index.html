@@ -36,10 +36,10 @@
 			document.getElementById("tempdata").innerHTML = celsius;
 			document.getElementById("lightdata").innerHTML = lightvalue;
 			if(motionsensor == 1) {
-				cpf.set("rgb led", 255, 0, 0);
+				cpf.request('["grove_setColorRGB", 0, 255, 0, 0]');
 				document.getElementById("movDetected").style.opacity = "1";
 			} else{
-				cpf.set("rgb led", 0, 0, 0);
+				cpf.request('["grove_setColorRGB", 0, 0, 0, 0]');
 				document.getElementById("movDetected").style.opacity = "0";
 			}
 		setTimeout(main, 1000); 

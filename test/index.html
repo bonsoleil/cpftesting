@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <head>
-<title>CPF - 6ème</title>
+	<title> CPF - 4ème </title>
 </head>
 <body>
 	<center>
-		<h1>Temperatura Interior:</h1><br>
+		<h1>TEST 1</h1><br>
+		<h1>Temperatura: </h1>
 		<span id="tempValue">none</span><br>
-		<h1>Ventilador:</h1><br>
-		<span id="currentFanSpeed">none</span><br>
+		<h1>Nivel de agua:</h1>
+		<span id="waterValue">none</span>
 	</center>
 <script>
 
 	//Variables
 	var tempdata;
 	var celsius;
-	var fanSpeed;
-	
+	var waterdata;
+
 	//Function Setup
 	setup();
 
@@ -23,10 +24,10 @@
 	function loop() {
 		if(cpf){
 			tempdata = cpf.get("a0");
+			waterdata = cpf.get("d6");
 			celsius = toCelsius(tempdata);
 			document.getElementById("tempValue").innerHTML = celsius;
-			updateFan();
-			document.getElementById("currentFanSpeed").innerHTML = fanSpeed;
+			document.getElementById("waterValue").innerHTML = waterdata;
 		}
 		setTimeout(loop, 1000);
 	}
@@ -40,31 +41,11 @@
 		return temperature.toFixed(2);
 	}
 
-	//Fan speed
-	function updateFan(){
-		if ((celsius > 18) && (celsius < 20)) {
-			cpf.request('["analogWrite", 3, 50]');
-			fanSpeed = 50;
-		}
-		else if ((celsius > 20) && (celsius < 25)) {
-				cpf.request('["analogWrite", 3, 100]');
-				fanSpeed = 100;
-		}
-		else if (celsius > 25) {
-			cpf.request('["analogWrite", 3, 200]');
-			fanSpeed = 200;
-		}
-		else {
-			cpf.request('["analogWrite", 3, 0]');
-			fanSpeed = 0;
-		}
-	}
-
 	// cpf setup
 	function setup(){
 		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "digital", 3, "PWM"]');
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]');
 	}
-</script>
+	</script>
 </body>
 </html>

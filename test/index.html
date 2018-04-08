@@ -20,7 +20,7 @@
 			tempdata = cpf.get("a0");
 			celsius = toCelsius(tempdata);
 			document.getElementById("tempValue").innerHTML = celsius;
-			cpf.request('["analogWrite", 3, 120]');
+			updateFan(celsius);
 		}
 		setTimeout(loop, 1000);
 	}
@@ -34,6 +34,27 @@
 		return temperature.toFixed(2);
 	}
 
+	//Fan speed
+	function updateFan(value){
+		switch (value) {
+			case value > 18 && celsius < 20:
+				cpf.request('["analogWrite", 3, 40]');
+				break;
+
+			case value > 20 && celsius < 25:
+				cpf.request('["analogWrite", 3, 100]');
+				break;
+
+			case value > 25:
+				cpf.request('["analogWrite", 3, 100]');
+				break;
+
+			default:
+				cpf.request('["analogWrite", 3, 0]');
+				break	;
+		}
+	}
+	
 	// cpf setup
 	function setup(){
 		if(cpf)

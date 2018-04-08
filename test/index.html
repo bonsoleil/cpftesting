@@ -32,9 +32,6 @@
 			document.getElementById("flameValue").innerHTML = flame;
 			document.getElementById("buttonValue").innerHTML = button;
 			document.getElementById("tempValue").innerHTML = celsius;
-			if (button){
-				cpf.request('["tone_play", 5, 261, 300]');
-			}
 		}
 		setTimeout(loop, 1000);
 	}
@@ -49,7 +46,7 @@
 
 	function setup(){
 		if(cpf){
-			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 2, "INPUT"],["setPinMode", "digital", 4, "INPUT"], ["setPinMode", "digital", 5, "TONE"]');
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 2, "INPUT"],["setPinMode", "digital", 4, "INPUT"]');
 		}
 	}
 </script>

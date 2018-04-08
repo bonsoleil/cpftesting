@@ -4,6 +4,7 @@
 </head>
 <body>
 <center>
+	<h1>TEST</h1>
 	<h1>Temperatura:</h1><br>
 	<span id=tempValue>none</span><br>
 	<h1>Flame:</h1><br>
@@ -23,7 +24,7 @@
 	setup();
 
 	//Main Function
-		function loop() {
+	function loop() {
 		if(cpf){
 			temp = cpf.get("a0");
 			celsius = toCelsius(temp);
@@ -32,6 +33,11 @@
 			document.getElementById("flameValue").innerHTML = flame;
 			document.getElementById("buttonValue").innerHTML = button;
 			document.getElementById("tempValue").innerHTML = celsius;
+			if (button){
+				cpf.request('["tone_play", 5, 261, 300]');
+				cpf.request('["tone_play", 5, 293, 300]');
+				cpf.request('["tone_play", 5, 329, 300]');
+			}
 		}
 		setTimeout(loop, 1000);
 	}

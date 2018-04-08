@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <head>
-	<title> CPF - 4ème </title>
+	<title> CPF - 2nde </title>
 </head>
 <body>
-	<center>
-		<h1>TEST 1</h1><br>
-		<h1>Temperatura: </h1>
-		<span id="tempValue">none</span><br>
-		<h1>Nivel de agua:</h1>
-		<span id="waterValue">none</span>
-	</center>
+<center>
+	<h1>Temperatura:</h1><br>
+	<span id=tempValue>none</span><br>
+	<h1>Flame:</h1><br>
+	<span id=flameValue> none </span><br>
+	<h1>Button:</h1><br>
+	<span id=buttonValue> none </span>
+</center>
 <script>
 
 	//Variables
-	var tempdata;
+	var temp;
 	var celsius;
-	var waterdata;
+	var button;
+	var flame;
 
 	//Function Setup
 	setup();
@@ -23,17 +25,21 @@
 	//Main Function
 	function loop() {
 		if(cpf){
-			tempdata = cpf.get("a0");
-			waterdata = cpf.get("d6");
-			celsius = toCelsius(tempdata);
+			temp = cpf.get("a0");
+			celsius = toCelsius(temp);
+			button = cpf.get("d2");
+			flame = cpf.get("d6");
+			document.getElementById("buttonValue").innerHTML = button;
 			document.getElementById("tempValue").innerHTML = celsius;
-			document.getElementById("waterValue").innerHTML = waterdata;
+			document.getElementById("flameValue").innerHTML = flame;
+			if(button == 1 || flame == 0){
+				cpf.request('["tone_play", 8, 261, 100]');
+			}
 		}
 		setTimeout(loop, 1000);
 	}
 	loop();
 
-	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
@@ -41,11 +47,11 @@
 		return temperature.toFixed(2);
 	}
 
-	// cpf setup
 	function setup(){
-		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]');
+		if(cpf){
+			cpf.setPinMode('["resetPin"], ["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 2, "INPUT"], ["setPinMode", "digital", 6, "INPUT"], ["setPinMode", "digital", 5, "TONE"]');
+		}
 	}
-	</script>
+</script>
 </body>
 </html>

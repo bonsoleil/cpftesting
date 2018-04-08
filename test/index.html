@@ -3,7 +3,7 @@
 <title>CPF - 6ème</title>
 </head>
 <body>
-	<h1>Temp:</h1><br>
+	<h1>Temp1:</h1><br>
 	<span id="tempValue">none</span><br>
 <script>
 
@@ -20,7 +20,7 @@
 			tempdata = cpf.get("a0");
 			celsius = toCelsius(tempdata);
 			document.getElementById("tempValue").innerHTML = celsius;
-			updateFan(celsius);
+			updateFan();
 		}
 		setTimeout(loop, 1000);
 	}
@@ -35,26 +35,21 @@
 	}
 
 	//Fan speed
-	function updateFan(value){
-		switch (value) {
-			case value > 18 && celsius < 20:
-				cpf.request('["analogWrite", 3, 40]');
-				break;
-
-			case value > 20 && celsius < 25:
+	function updateFan(){
+		if ((celsius > 18) && (celsius < 20)) {
+			cpf.request('["analogWrite", 3, 50]');
+		}
+		else if ((celsius > 20) && (celsius < 25)) {
 				cpf.request('["analogWrite", 3, 100]');
-				break;
-
-			case value > 25:
-				cpf.request('["analogWrite", 3, 100]');
-				break;
-
-			default:
-				cpf.request('["analogWrite", 3, 0]');
-				break	;
+		}
+		else if (celsius > 25) {
+			cpf.request('["analogWrite", 3, 200]');
+		}
+		else {
+			cpf.request('["analogWrite", 3, 0]');
 		}
 	}
-	
+
 	// cpf setup
 	function setup(){
 		if(cpf)

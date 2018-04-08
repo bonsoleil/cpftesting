@@ -29,6 +29,7 @@
 			celsius = toCelsius(temp);
 			button = cpf.get("d2");
 			flame = cpf.get("d4");
+			cpf.request('["tone_play", 6, 261, 100]');
 			document.getElementById("flameValue").innerHTML = flame;
 			document.getElementById("buttonValue").innerHTML = button;
 			document.getElementById("tempValue").innerHTML = celsius;

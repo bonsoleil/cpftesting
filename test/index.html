@@ -5,17 +5,22 @@
 <body>
 	<h1>Temp:</h1><br>
 	<span id="tempValue">none</span><br>
-
 <script>
+
+	//Variables
 	var tempdata;
 	var celsius;
+
+	//Function Setup
 	setup();
-	// Analog
+
+	//Main Function
 	function loop() {
 		if(cpf){
 			tempdata = cpf.get("a0");
 			celsius = toCelsius(tempdata);
 			document.getElementById("tempValue").innerHTML = celsius;
+			cpf.request('["analogWrite", 3, 120]');
 		}
 		setTimeout(loop, 1000);
 	}
@@ -32,7 +37,7 @@
 	// cpf setup
 	function setup(){
 		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"]');
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "digital", 3, "PWM"]');
 	}
 </script>
 </body>

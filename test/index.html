@@ -24,11 +24,11 @@ var tempconverted;
 
 	function main(){
 		if (cpf){
-			temp = cpf.get("temperature sensor");
+			temp = cpf.get("a0");
 			tempconverted = toCelsius(temp);
 			document.getElementById("tempvalue").innerHTML = tempconverted;
 		}
-		setTimeout(main, 1000);
+		setTimeout(main(), 1000);
 	}
 
 	function setup(){

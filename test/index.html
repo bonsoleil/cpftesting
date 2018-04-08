@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <head>
-	<title> CPF - 6ÈME</title>
+<title>CPF - 6ème</title>
 </head>
 <body>
-<center>
-	<h1>6ème CPF v2</h1>
-	<br>
-	<h1>Temperature Sensor</h1>
-	<span id="tempvalue">none</span>
-</center>
+	<h1>Temp:</h1><br>
+	<span id="tempValue">none</span><br>
 
 <script>
+	var tempdata;
+	var celsius;
+	setup();
+	// Analog
+	function loop() {
+		if(cpf){
+			tempdata = cpf.get("a0");
+			celsius = toCelsius(tempdata);
+			document.getElementById("temperaturevalue").innerHTML = celsius;
+		}
+		setTimeout(loop, 1000);
+	}
+	loop();
 
-var temp;
-var tempconverted;
-
+	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
@@ -22,23 +29,11 @@ var tempconverted;
 		return temperature.toFixed(2);
 	}
 
-	function main(){
-		if (cpf){
-			temp = cpf.get("a0");
-			tempconverted = toCelsius(temp);
-			document.getElementById("tempvalue").innerHTML = tempconverted;
-		}
-		setTimeout(main(), 1000);
-	}
-
+	// cpf setup
 	function setup(){
-		if (cpf) {
+		if(cpf)
 			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"]');
-		}
 	}
-
-		setup();
-		main();
-	</script>
+</script>
 </body>
 </html>

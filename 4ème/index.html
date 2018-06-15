@@ -1,52 +1,50 @@
+<!DOCTYPE html>
 <head>
+	<title> CPF - 4ème </title>
+</head>
 <body>
-	<title> Cloud </title>
-<center>
-	<h1>TEST 1</h1>
-	<br>
-	<h1>Temperature Sensor</h1>
-	<span id="tempvalue">none</span>
-	<br>
-	<h1>Water Sensor</h1>
-	<span id="watervalue">none</span>
-	
-</center>
-
+	<center>
+		<h1>Temperatura: </h1>
+		<span id="tempValue">none</span><br>
+		<h1>Nivel de agua:</h1>
+		<span id="waterValue">none</span>
+	</center>
 <script>
-	
+
+	//Variables
 	var tempdata;
-	var tempConverted;
+	var celsius;
 	var waterdata;
-	
-	function main() {
+
+	//Function Setup
+	setup();
+
+	//Main Function
+	function loop() {
 		if(cpf){
-			tempdata = cpf.get("temperature sensor");
+			tempdata = cpf.get("a0");
 			waterdata = cpf.get("d6");
-			tempConverted = toCelsius(tempdata);
-			document.getElementById("tempvalue").innerHTML = tempConverted;
-			document.getElementById("watervalue").innerHTML = waterdata;
+			celsius = toCelsius(tempdata);
+			document.getElementById("tempValue").innerHTML = celsius;
+			document.getElementById("waterValue").innerHTML = waterdata;
 		}
 		setTimeout(loop, 1000);
 	}
-	
+	loop();
+
 	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
-		
+
 		return temperature.toFixed(2);
 	}
-	
 
-	setup();
-	loop();
-	
 	// cpf setup
 	function setup(){
 		if(cpf)
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]'); 
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"], ["setPinMode", "digital", 6, "INPUT"]');
 	}
-	
 	</script>
 </body>
 </html>

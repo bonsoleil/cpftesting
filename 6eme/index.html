@@ -42,7 +42,7 @@
 
 	//Fan speed
 	function updateFan(){
-		if ((celsius > 18) && (celsius < 20)) {
+		if ((celsius > 10) && (celsius < 20)) {
 			cpf.request('["analogWrite", 3, 50]');
 			fanSpeed = 50;
 		}

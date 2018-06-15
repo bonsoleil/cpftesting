@@ -1,18 +1,38 @@
+<!DOCTYPE html>
+<head>
+	<title>CPF - 6ème</title>
 </head>
 <body>
-	<title> CPF </title>
-<center>
-	<h1>6ème CPF v3</h1>
-	<br>
-	<h1>Temperature Sensor</h1>
-	<span id="tempvalue">none</span>
-</center>
-
+	<center>
+		<h1>Temperatura Interior:</h1><br>
+		<span id="tempValue">none</span><br>
+		<h1>Ventilador:</h1><br>
+		<span id="currentFanSpeed">none</span><br>
+	</center>
 <script>
 
-var temp;
-var tempconverted;
+	//Variables
+	var tempdata;
+	var celsius;
+	var fanSpeed;
 
+	//Function Setup
+	setup();
+
+	//Main Function
+	function loop() {
+		if(cpf){
+			tempdata = cpf.get("a0");
+			celsius = toCelsius(tempdata);
+			document.getElementById("tempValue").innerHTML = celsius;
+			updateFan();
+			document.getElementById("currentFanSpeed").innerHTML = fanSpeed;
+		}
+		setTimeout(loop, 1000);
+	}
+	loop();
+
+	// Temperature
 	function toCelsius(value) {
 		var resistance = parseFloat((1023-value) * 10000 / value);
 		var temperature = 1 / (Math.log(resistance / 10000) / 3975+1 / 298.15) - 273.15;
@@ -20,23 +40,31 @@ var tempconverted;
 		return temperature.toFixed(2);
 	}
 
-	function main(){
-		if (cpf){
-			temp = cpf.get("temperature sensor");
-			tempconverted = toCelsius(temp);
-			document.getElementById("tempvalue").innerHTML = tempconverted;
+	//Fan speed
+	function updateFan(){
+		if ((celsius > 18) && (celsius < 20)) {
+			cpf.request('["analogWrite", 3, 50]');
+			fanSpeed = 50;
 		}
-		setTimeout(main, 1000);
+		else if ((celsius > 20) && (celsius < 25)) {
+				cpf.request('["analogWrite", 3, 100]');
+				fanSpeed = 100;
+		}
+		else if (celsius > 25) {
+			cpf.request('["analogWrite", 3, 200]');
+			fanSpeed = 200;
+		}
+		else {
+			cpf.request('["analogWrite", 3, 0]');
+			fanSpeed = 0;
+		}
 	}
 
+	// cpf setup
 	function setup(){
-		if (cpf) {
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"]');
-		}
+		if(cpf)
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "digital", 3, "PWM"]');
 	}
-
-		setup();
-		main();
-	</script>
+</script>
 </body>
 </html>
